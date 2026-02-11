@@ -1214,7 +1214,7 @@ export default function TutorialPage() {
               <div
                 style={{
                   maxWidth: isMobile ? '100%' : '650px',
-                  marginTop: isMobile ? '0' : '-2.5rem',
+                  marginTop: isMobile ? '0' : '-1rem',
                   marginLeft: isMobile ? '0' : '-3rem',
                 }}
               >
