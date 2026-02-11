@@ -1276,7 +1276,7 @@ export default function TutorialPage() {
                     lineHeight: isMobile ? '22px' : '26px',
                   }}
                 >
-                  Learn how to streamline call management, boost productivity, and scale faster with comprehensive
+                  Learn how to streamline call management, and scale faster with 
                   tutorials covering setup, configuration, and advanced features.
                 </motion.p>
 
