@@ -1143,11 +1143,11 @@ export default function TutorialPage() {
         />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+     <div style={{ position: 'relative', zIndex: 10, width: '100%' }}>
         {/* Hero Section */}
         <section
           style={{
-            padding: isMobile ? '2rem 1rem' : isTablet ? '2.5rem 1.5rem' : '3rem 1.5rem',
+            padding: isMobile ? '2rem 1rem' : isTablet ? '2.5rem 1.5rem' : '1rem 1.5rem',
             minHeight: isMobile ? 'auto' : '500px',
             display: 'flex',
             alignItems: 'center',
@@ -1159,51 +1159,48 @@ export default function TutorialPage() {
               maxWidth: '1280px',
               margin: '0 auto',
               width: '100%',
-              padding: isMobile ? '0 0.5rem' : '0 1.5rem',
+              padding: isMobile ? '0' : '0 1.5rem',
             }}
           >
             <div
               style={{
                 display: isMobile ? 'flex' : 'grid',
                 flexDirection: isMobile ? 'column' : undefined,
-                gridTemplateColumns: isMobile ? undefined : isTablet ? '1fr' : '1.1fr 0.9fr',
+                      gridTemplateColumns: isMobile ? undefined : isTablet ? '1fr' : '1.1fr 0.9fr',
                 gap: isMobile ? '0rem' : isTablet ? '2.5rem' : '3rem',
                 alignItems: 'start',
               }}
             >
               {/* Logo - appears first on mobile */}
               {isMobile && (
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.05 }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'centre',
-                    justifyContent: 'flex-start',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  <img
-                    src={logoImage}
-                    alt="Callifo Logo"
-                    style={{
-                      width: '8rem',
-                      height: 'auto',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </motion.div>
-              )}
-
-              {/* Video - appears second on mobile */}
-              {isMobile && (
+                <div
+  style={{
+    paddingTop: '1.5rem',
+    paddingBottom: '0.5rem', 
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <img
+    src={logoImage}
+    alt="GeoTrack"
+    style={{
+      maxWidth: '100%',
+      width: '220px',
+      marginTop: '-12px',
+      height: 'auto',
+    }}
+  />
+</div>
+)}
+{/* Video - appears second on mobile */}
+{isMobile && (
                 <motion.div
                   style={{ 
                     width: '100%', 
                     display: 'flex', 
                     justifyContent: 'center', 
-                    marginTop: '1.25rem',
+                    marginTop: '-16px',
                   }}
                 >
                   <TutorialVideo />
@@ -1214,8 +1211,8 @@ export default function TutorialPage() {
               <div
                 style={{
                   maxWidth: isMobile ? '100%' : '650px',
-                  marginTop: isMobile ? '0' : '-2rem',
-                  marginLeft: isMobile ? '0' : '-3rem',
+                  marginTop: isMobile ? '0' : '-2.5rem',
+                   marginLeft: isMobile ? '0' : '-6rem',
                 }}
               >
                 <motion.h1
@@ -1241,16 +1238,15 @@ export default function TutorialPage() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'flex-start',
-                        marginTop:'4rem',
-                        marginLeft: '2rem',
-                        marginBottom: '1rem',
+                        marginLeft: '-4rem',
+                        marginBottom: '-2.5rem',
                       }}
                     >
                       <img
                         src={logoImage}
-                        alt="Callifo Logo"
+                        alt="Geotrack Logo"
                         style={{
-                          width: isTablet ? '8rem' : '12rem',
+                          width: isTablet ? '16rem' : '20rem',
                           height: 'auto',
                           objectFit: 'contain',
                         }}
@@ -1258,7 +1254,7 @@ export default function TutorialPage() {
                     </motion.div>
                   )}
 
-                  <span style={{ color: 'rgb(6, 182, 212)', fontWeight: 900 }}>Explore Callifo</span>{' '}
+                  <span style={{ color: 'rgb(6, 182, 212)', fontWeight: 900 }}>Explore Geotrack</span>{' '}
                   <span style={{ color: '#0F172A' }}>with Detailed Step-by-Step Tutorials</span>
                 </motion.h1>
 
@@ -1276,8 +1272,7 @@ export default function TutorialPage() {
                     lineHeight: isMobile ? '22px' : '26px',
                   }}
                 >
-                  Learn how to streamline call management, and scale faster with<br/> 
-                  tutorials covering setup, configuration, and advanced features.
+               Learn how to discover nearby clients, plan meetings, and track field <br/> visits with tutorials covering client mapping,and visit tracking.
                 </motion.p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -1317,10 +1312,10 @@ export default function TutorialPage() {
                       <span
                         style={{
                           fontFamily: "'Inter', sans-serif",
-                          fontSize: isMobile ? '14px' : '16px',
+                          fontSize: isMobile ? '18px' : '19px',
                           fontWeight: 500,
                           color: '#475569',
-                          lineHeight: isMobile ? '22px' : '26px',
+                          lineHeight: isMobile ? '28px' : '30px',
                         }}
                       >
                         {feature}
