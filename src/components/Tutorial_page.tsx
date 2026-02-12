@@ -1415,7 +1415,6 @@ export default function TutorialPage() {
     margin: '1.25rem auto 0',
     maxWidth: 'fit-content',
 
-    // 👇 BOX STYLES
     background:
       'linear-gradient(135deg, rgba(6,182,212,0.12), rgba(59,130,246,0.12))',
     border: '1.5px solid rgba(6,182,212,0.35)',
@@ -1587,7 +1586,6 @@ export default function TutorialPage() {
         </section>
 
         {/* CTA SECTION */}
-            {/* CTA SECTION */}
        <div
           style={{
             padding: isMobile ? '3rem 1.25rem 4rem' : isTablet ? '4rem 2.5rem 5rem' : '5rem 3rem 6rem',
