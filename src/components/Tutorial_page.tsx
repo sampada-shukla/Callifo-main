@@ -624,7 +624,7 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
                 transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 25 }}
                 style={{
                   position: isMobile ? 'relative' : 'absolute',
-                  bottom: isMobile ? 'auto' : '-20px',
+                  bottom: isMobile ? 'auto' : '80px',
                   top: isMobile ? 'auto' : 'auto',
                   left: isMobile ? '0' : (imageOnLeft ? '0' : 'auto'),
                   right: isMobile ? '0' : (imageOnLeft ? 'auto' : '0'),
@@ -659,7 +659,7 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
                 </motion.div>
 
                 {/* Step badge - Enhanced with vibrant color */}
-                <motion.div
+                <motion.div>
 
   style={{
     position: 'absolute',
@@ -672,7 +672,7 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
 
     background: step.iconColor,
 
-    /* 🔥 CLEAR BORDER RING */
+    /* CLEAR BORDER RING */
     boxShadow: `
       0 0 0 6px ${step.iconColor}99,
       0 12px 25px rgba(0,0,0,0.35)
@@ -731,36 +731,6 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
                   {step.description}
                 </p>
 
-              {/*{step.details && (
-                  <ul
-                    style={{
-                      marginTop: '1rem',
-                      paddingLeft: '0',
-                      listStyle: 'none',
-                    }}
-                  >
-                    {step.details.map((d, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        style={{
-                          fontSize: isMobile ? '0.8rem' : '0.85rem',
-                          color: 'rgba(255,255,255,0.8)',
-                          marginBottom: '0.5rem',
-                          fontFamily: '"Inter", sans-serif',
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          gap: '0.5rem',
-                        }}
-                      >
-                        <Zap size={14} color={step.iconColor} style={{ marginTop: '2px', flexShrink: 0 }} />
-                        <span>{d}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                )}*/}
               </motion.div>
             )}
           </AnimatePresence>
@@ -942,22 +912,7 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
             >
               {step.title}
             </h4>
-
-            {/* Description */}
-           {/*<p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: isMobile ? '15px' : '16px',
-                color: 'rgb(71, 85, 105)',
-                lineHeight: 1.7,
-                marginBottom: step.details ? '1.25rem' : '0',
-                position: 'relative',
-                zIndex: 1,
-              }}
-            >
-              {step.description}
-            </p>*/}
-
+    
             {/* Details */}
             {step.details && (
               <div
