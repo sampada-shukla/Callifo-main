@@ -659,9 +659,8 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps })
                 </motion.div>
 
                 {/* Step badge - Enhanced with vibrant color */}
-                <motion.div>
-
-  style={{
+  <motion.div
+    style={{
     position: 'absolute',
     top: '-26px',
     left: '-26px',
