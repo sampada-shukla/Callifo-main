@@ -135,7 +135,6 @@ const ZoomModal = ({ show, onClose, step, currentImage, isMobile }: { show: bool
 };
 
 // ─── PopupCard ────────────────────────────────────────────────────────────────
-// Shared popup for desktop (absolute positioned) and mobile (relative)
 const PopupCard = ({ step, isMobile, imageOnLeft, popRef, zoomingRef, setShowZoom, setShowPopup }: {
   step: TutorialStep; isMobile: boolean; imageOnLeft: boolean;
   popRef: React.RefObject<HTMLDivElement>; zoomingRef: React.MutableRefObject<boolean>;
@@ -169,22 +168,18 @@ const PopupCard = ({ step, isMobile, imageOnLeft, popRef, zoomingRef, setShowZoo
         backdropFilter: 'blur(20px)',
         border: `1px solid ${step.iconColor}40`,
       }}>
-      {/* sparkle */}
       <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }}
         style={{ position: 'absolute', top: 10, right: 10, pointerEvents: 'none' }}>
         <Sparkles color={step.iconColor} size={20} />
       </motion.div>
-      {/* zoom button — always shown; pointerEvents:auto overrides parent's none on desktop */}
       <button
         onClick={(e) => { e.stopPropagation(); zoomingRef.current = true; setShowZoom(true); setTimeout(() => { zoomingRef.current = false; }, 300); }}
         style={{ position: 'absolute', top: 10, right: 38, width: 28, height: 28, borderRadius: '50%', background: step.iconColor, border: '2px solid rgba(255,255,255,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-in', zIndex: 30, pointerEvents: 'auto' }}>
         <ZoomIn size={13} color="white" strokeWidth={2.5} />
       </button>
-      {/* step number badge */}
       <div style={{ position: 'absolute', top: -26, left: -26, width: 56, height: 56, borderRadius: '50%', background: step.iconColor, boxShadow: `0 0 0 6px ${step.iconColor}99,0 12px 25px rgba(0,0,0,0.35)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700, color: 'white', zIndex: 20 }}>
         {step.number}
       </div>
-      {/* icon */}
       <div style={{ width: isMobile ? '3rem' : '3.5rem', height: isMobile ? '3rem' : '3.5rem', borderRadius: '1rem', background: `linear-gradient(135deg,${step.iconColor},${step.iconColor}dd)`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: `0 8px 20px ${step.iconColor}40` }}>
         <Icon color="white" size={isMobile ? 20 : 24} strokeWidth={2.5} />
       </div>
@@ -279,7 +274,6 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
         <motion.div
           style={{ x: isMobile ? 0 : imageX, scale: imageScale, opacity: imageOpacity, order: isMobile ? 1 : imageOnLeft ? 1 : 2, position: 'relative', background: `linear-gradient(135deg,${step.iconColor}05,${step.iconColor}02)`, borderRadius: 32, padding: isMobile ? '2rem 1.5rem' : '3rem 2rem' }}
         >
-          {/* particles */}
           {[...Array(5)].map((_, i) => (
             <motion.div key={i}
               animate={{ y: [0, -30, 0], x: [0, Math.sin(i) * 20, 0], opacity: [0.3, 0.6, 0.3] }}
@@ -288,15 +282,12 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
             />
           ))}
 
-          {/* rotating ring */}
           <motion.div animate={isInView ? { rotate: [0, 360], scale: [1, 1.1, 1] } : {}} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             style={{ position: 'absolute', top: -40, right: -40, width: 120, height: 120, borderRadius: '50%', background: `conic-gradient(from 0deg,${step.iconColor}20,transparent,${step.iconColor}20)`, filter: 'blur(30px)', zIndex: -1 }} />
 
-          {/* pulsing glow */}
           <motion.div animate={isInView ? { scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] } : {}} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '90%', height: '90%', borderRadius: 30, background: `radial-gradient(circle,${step.iconColor}15,transparent 70%)`, filter: 'blur(40px)', zIndex: -1 }} />
 
-          {/* ── hover container ── */}
           <motion.div
             whileHover={{ scale: 1.02, rotate: imageOnLeft ? -2 : 2 }}
             transition={{ duration: 0.3 }}
@@ -320,7 +311,6 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
               style={{ width: '100%', maxWidth: isMobile ? 420 : isTablet ? 500 : 550, height: 'auto', margin: '0 auto', display: 'block', filter: 'drop-shadow(0 20px 50px rgba(0,0,0,0.18))', borderRadius: 20, cursor: isMobile ? 'pointer' : 'default', border: `3px solid ${step.iconColor}40`, transformStyle: 'preserve-3d', objectFit: 'contain' }}
             />
 
-            {/* eye overlay */}
             <motion.div initial={{ opacity: 0 }} whileHover={{ opacity: 1 }}
               style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg,${step.iconColor}20,${step.iconColor}10)`, borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', backdropFilter: 'blur(2px)' }}>
               <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
@@ -328,56 +318,29 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
               </motion.div>
             </motion.div>
 
-            {/* corner accents */}
             <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
               style={{ position: 'absolute', top: -10, left: -10, width: 40, height: 40, borderTop: `3px solid ${step.iconColor}`, borderLeft: `3px solid ${step.iconColor}`, borderRadius: '20px 0 0 0' }} />
             <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
               style={{ position: 'absolute', bottom: -10, right: -10, width: 40, height: 40, borderBottom: `3px solid ${step.iconColor}`, borderRight: `3px solid ${step.iconColor}`, borderRadius: '0 0 20px 0' }} />
           </motion.div>
-          {/* ── END hover container ── */}
 
-          {/* Desktop popup — shown only on non-mobile, positioned absolute inside image side */}
           {!isMobile && (
             <AnimatePresence>
               {showPopup && (
-                <PopupCard
-                  step={step}
-                  isMobile={false}
-                  imageOnLeft={imageOnLeft}
-                  popRef={popRef}
-                  zoomingRef={zoomingRef}
-                  setShowZoom={setShowZoom}
-                  setShowPopup={setShowPopup}
-                />
+                <PopupCard step={step} isMobile={false} imageOnLeft={imageOnLeft} popRef={popRef} zoomingRef={zoomingRef} setShowZoom={setShowZoom} setShowPopup={setShowPopup} />
               )}
             </AnimatePresence>
           )}
 
-          {/* ZoomModal portal — lives outside any transform context */}
-          <ZoomModal
-            show={showZoom}
-            onClose={() => setShowZoom(false)}
-            step={step}
-            currentImage={currentImage}
-            isMobile={isMobile}
-          />
+          <ZoomModal show={showZoom} onClose={() => setShowZoom(false)} step={step} currentImage={currentImage} isMobile={isMobile} />
 
         </motion.div>
         {/* ══ END IMAGE SIDE ══ */}
 
-        {/* Mobile popup — rendered as its own grid item below image side */}
         {isMobile && (
           <AnimatePresence>
             {showPopup && (
-              <PopupCard
-                step={step}
-                isMobile={true}
-                imageOnLeft={imageOnLeft}
-                popRef={popRef}
-                zoomingRef={zoomingRef}
-                setShowZoom={setShowZoom}
-                setShowPopup={setShowPopup}
-              />
+              <PopupCard step={step} isMobile={true} imageOnLeft={imageOnLeft} popRef={popRef} zoomingRef={zoomingRef} setShowZoom={setShowZoom} setShowPopup={setShowPopup} />
             )}
           </AnimatePresence>
         )}
@@ -393,6 +356,10 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
             marginRight: !isMobile && !imageOnLeft ? '2rem' : '0',
             pointerEvents: showZoom ? 'none' : 'auto',
             transition: 'opacity 0.3s ease',
+            /* Centre the portrait card in its grid cell */
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <motion.div
@@ -409,55 +376,66 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
               backdropFilter: 'blur(14px) saturate(120%)',
               WebkitBackdropFilter: 'blur(14px) saturate(120%)',
               position: 'relative',
-              width: '100%',
-              maxWidth: isMobile ? '100%' : isTablet ? '430px' : '460px',
+              /* ── Portrait: fixed width, no minHeight — hugs content ── */
+              width: isMobile ? '100%' : isTablet ? '380px' : '440px',
             }}
           >
+            {/* corner glow */}
             <motion.div animate={{ rotate: [0, 90, 180, 270, 360] }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
               style={{ position: 'absolute', top: -50, right: -50, width: 150, height: 150, background: `conic-gradient(from 0deg,${step.iconColor}15,transparent,${step.iconColor}15)`, borderRadius: '50%', filter: 'blur(40px)' }} />
 
+            {/* Header row */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: isMobile ? '0.95rem' : '1.1rem', position: 'relative', zIndex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {/* Icon box */}
                 <motion.div whileHover={{ scale: 1.12, rotate: 360 }} transition={{ duration: 0.6, ease: 'easeInOut' }}
-                  style={{ width: isMobile ? 52 : 58, height: isMobile ? 52 : 58, borderRadius: 14, background: `linear-gradient(135deg,${step.iconColor},${step.iconColor}dd)`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 10px 22px ${step.iconColor}40`, position: 'relative', overflow: 'visible' }}>
-                  <Icon color="white" size={isMobile ? 24 : 28} strokeWidth={2.5} style={{ position: 'relative', zIndex: 3 }} />
+                  style={{ width: isMobile ? 56 : 68, height: isMobile ? 56 : 68, borderRadius: 16, background: `linear-gradient(135deg,${step.iconColor},${step.iconColor}dd)`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 12px 28px ${step.iconColor}40, 0 0 20px ${step.iconColor}20`, position: 'relative', overflow: 'visible', flexShrink: 0 }}>
+                  <Icon color="white" size={isMobile ? 28 : 34} strokeWidth={2.5} style={{ position: 'relative', zIndex: 3, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
                   <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }} transition={{ duration: 2, repeat: Infinity }}
-                    style={{ position: 'absolute', inset: -3, borderRadius: 14, border: `2px solid ${step.iconColor}`, zIndex: 1 }} />
+                    style={{ position: 'absolute', inset: -4, borderRadius: 16, border: `2px solid ${step.iconColor}`, zIndex: 1 }} />
                 </motion.div>
                 <div>
-                  <div style={{ fontSize: isMobile ? '0.7rem' : '0.78rem', fontWeight: 700, color: step.iconColor, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>Step {step.number} of {totalSteps}</div>
-                  <div style={{ width: isMobile ? 52 : 58, height: 3, background: `linear-gradient(to right,${step.iconColor},transparent)`, borderRadius: 2 }} />
+                  <div style={{ fontSize: isMobile ? '0.7rem' : '0.8rem', fontWeight: 700, color: step.iconColor, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
+                    Step {step.number} of {totalSteps}
+                  </div>
+                  <div style={{ width: isMobile ? 52 : 60, height: 3, background: `linear-gradient(to right,${step.iconColor},transparent)`, borderRadius: 2 }} />
                 </div>
               </div>
+
+              {/* Step number badge */}
               <motion.div whileHover={{ scale: 1.1 }}
-                style={{ width: isMobile ? 50 : 56, height: isMobile ? 50 : 56, borderRadius: 14, background: step.iconColor, border: '3px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Poppins",sans-serif', fontSize: isMobile ? 20 : 26, fontWeight: 800, color: 'white', boxShadow: `0 0 0 2px white,0 8px 20px ${step.iconColor}` }}>
+                style={{ width: isMobile ? 52 : 64, height: isMobile ? 52 : 64, borderRadius: 16, background: step.iconColor, border: '2px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Poppins",sans-serif', fontSize: isMobile ? 22 : 28, fontWeight: 800, color: 'white', boxShadow: `0 0 0 2px white,0 8px 20px ${step.iconColor},0 18px 40px rgba(0,0,0,0.2),inset 0 2px 0 rgba(255,255,255,0.5)`, flexShrink: 0 }}>
                 {step.number}
               </motion.div>
             </div>
 
-            <h4 style={{ fontFamily: '"Poppins",sans-serif', fontSize: isMobile ? 18 : isTablet ? 21 : 24, fontWeight: 700, color: 'rgb(20,47,83)', lineHeight: 1.2, marginBottom: isMobile ? '0.8rem' : '1rem', position: 'relative', zIndex: 1 }}>{step.title}</h4>
+            {/* Title */}
+            <h4 style={{ fontFamily: '"Poppins",sans-serif', fontSize: isMobile ? 20 : isTablet ? 23 : 26, fontWeight: 700, color: 'rgb(20,47,83)', lineHeight: 1.25, marginBottom: isMobile ? '0.8rem' : '1rem', position: 'relative', zIndex: 1 }}>
+              {step.title}
+            </h4>
 
+            {/* Details */}
             {step.details && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '0.6rem' : '0.7rem', position: 'relative', zIndex: 1 }}>
                 {step.details.map((detail, i) => (
                   <motion.div key={i}
                     initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }} transition={{ delay: 0.1 * i, duration: 0.4 }}
-                    style={{ display: 'flex', alignItems: 'flex-start', gap: isMobile ? '0.55rem' : '0.65rem', padding: isMobile ? '0.55rem 0.8rem' : '0.6rem 0.9rem', background: `linear-gradient(90deg,${step.iconColor}08,transparent)`, borderRadius: 8, borderLeft: `3px solid ${step.iconColor}` }}>
-                    <CheckCircle size={isMobile ? 16 : 17} color={step.iconColor} style={{ marginTop: 1, flexShrink: 0 }} />
-                    <span style={{ fontSize: isMobile ? 12 : 13, color: 'rgb(100,116,139)', lineHeight: 1.4, fontFamily: '"Inter",sans-serif' }}>{detail}</span>
+                    style={{ display: 'flex', alignItems: 'flex-start', gap: isMobile ? '0.55rem' : '0.65rem', padding: isMobile ? '0.55rem 0.8rem' : '0.65rem 0.9rem', background: `linear-gradient(90deg,${step.iconColor}08,transparent)`, borderRadius: 10, borderLeft: `3px solid ${step.iconColor}`, boxShadow: `0 2px 8px ${step.iconColor}10` }}>
+                    <CheckCircle size={isMobile ? 15 : 17} color={step.iconColor} style={{ marginTop: 2, flexShrink: 0 }} />
+                    <span style={{ fontSize: isMobile ? 13 : 15, color: 'rgb(100,116,139)', lineHeight: 1.5, fontFamily: '"Inter",sans-serif' }}>{detail}</span>
                   </motion.div>
                 ))}
               </div>
             )}
 
-            <motion.div initial={{ width: 0 }} animate={isInView ? { width: 116 } : { width: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
-              style={{ height: 4, background: step.iconColor, marginTop: '0.5rem', borderRadius: 10, boxShadow: `0 3px 12px ${step.iconColor}`, position: 'relative', zIndex: 10 }} />
+            {/* Progress bar */}
+            <motion.div initial={{ width: 0 }} animate={isInView ? { width: 110 } : { width: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
+              style={{ height: 4, background: step.iconColor, marginTop: '1.25rem', borderRadius: 10, boxShadow: `0 3px 12px ${step.iconColor},0 6px 25px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.6)`, position: 'relative', zIndex: 10 }} />
           </motion.div>
         </motion.div>
         {/* ══ END TEXT SIDE ══ */}
 
       </div>
-      {/* END GRID */}
     </div>
   );
 };
