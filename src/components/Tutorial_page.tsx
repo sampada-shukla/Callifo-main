@@ -38,10 +38,52 @@ const tutorialSections = [
     sectionTitle: '1. Admin Registration & Authentication',
     sectionDescription: 'Initial system onboarding where the Admin registers, activates the license, and securely sets up credentials',
     steps: [
-      { number: 1, title: 'Employee Registration', description: 'Allows the user to create a new employee account by entering company details, email, password as well as sim card selection.', icon: UserPlus, iconColor: '#5B6AD0', image: admin1, details: ['Enter company information', 'Provide email and password', 'Select SIM card configuration', 'Complete account setup'] },
-      { number: 2, title: 'Employee Login (Email & Password)', description: 'Enables employees to securely sign in using their registered email and password.', icon: Mail, iconColor: '#4A7FD4', image: login_email, details: ['Enter registered email', 'Provide secure password', 'Access dashboard instantly', 'Stay signed in option'] },
-      { number: 3, title: 'Employee Login (Email & OTP)', description: "Provides an alternative login method using a one-time password sent to the employee's email.", icon: Shield, iconColor: '#3A9E6F', image: login_otp, details: ['Enter registered email', 'Receive OTP via email', 'Verify one-time code', 'Secure authentication'] },
-      { number: 4, title: 'Password Reset via OTP', description: 'Allows employees to securely reset their password using email-based OTP verification.', icon: Lock, iconColor: '#7B5EA7', image: reset, details: ['Request password reset', 'Receive verification OTP', 'Enter new password', 'Confirm and save'] },
+      { 
+        number: 1, 
+        title: 'Employee Registration', 
+        description: 'Allows the user to create a new employee account by entering company details, email, password as well as sim card selection.', 
+        icon: UserPlus, 
+        iconColor: '#7C3AED', 
+        image: admin1, 
+        details: ['Enter company information', 
+                  'Provide email and password', 
+                  'Select SIM card configuration', 
+                  'Complete account setup'
+                ] },
+      { 
+        number: 2, 
+        title: 'Employee Login (Email & Password)', 
+        description: 'Enables employees to securely sign in using their registered email and password.', 
+        icon: Mail, 
+        iconColor: '#2563EB', 
+        image: login_email, 
+        details: ['Enter registered email', 
+          'Provide secure password', 
+          'Access dashboard instantly', 
+          'Stay signed in option'
+        ] },
+      { 
+        number: 3, 
+        title: 'Employee Login (Email & OTP)', 
+        description: "Provides an alternative login method using a one-time password sent to the employee's email.", 
+        icon: Shield, 
+        iconColor: '#D4AC0D', 
+        image: login_otp, 
+        details: ['Enter registered email', 
+          'Receive OTP via email', 
+          'Verify one-time code', 
+          'Secure authentication'
+        ] },
+      { 
+        number: 4, 
+        title: 'Password Reset via OTP', 
+        description: 'Allows employees to securely reset their password using email-based OTP verification.', 
+        icon: Lock, 
+        iconColor: '#9333EA', 
+        image: reset, 
+        details: ['Request password reset', 'Receive verification OTP', 'Enter new password', 'Confirm and save'
+
+        ] },
     ],
   },
   {
@@ -49,18 +91,58 @@ const tutorialSections = [
     sectionTitle: '2. Dashboard Overview',
     sectionDescription: 'Monitor real-time call activity, system health, and performance from a centralized dashboard',
     steps: [
-      { number: 5, title: 'User Dashboard', description: 'Displays a summarized view of total calls, incoming calls, outgoing calls, and missed calls.', icon: BarChart3, iconColor: '#C95C5C', image: callifo_dashboard, details: ['Total calls overview', 'Incoming calls tracking', 'Outgoing calls monitoring', 'Missed calls summary', 'Real-time analytics'] },
+      { 
+        number: 5, 
+        title: 'User Dashboard', 
+        description: 'Displays a summarized view of total calls, incoming calls, outgoing calls, and missed calls.', 
+        icon: BarChart3, 
+        iconColor: '#F43F5E', 
+        image: callifo_dashboard, 
+        details: ['Total calls overview', 'Incoming calls tracking', 'Outgoing calls monitoring', 'Missed calls summary', 'Real-time analytics'
+
+        ] },
     ],
   },
   {
     sectionId: 3,
-    sectionTitle: '3. Callifo Mobile Application',
-    sectionDescription: 'Access and manage Callifo mobile features including SIM configuration, dialing, and application information',
+    sectionTitle: '3. Settings Overview',
+    sectionDescription:'Configure SIM settings, view app information, and manage calls from mobile application.',
     steps: [
-      { number: 6, title: 'Settings Screen', description: 'Provides access to SIM configuration, app management options, update checks, and quick actions such as downloading the latest APK or signing out.', icon: Settings, iconColor: '#2E8FAD', image: settings, details: ['SIM configuration access', 'App management options', 'Update availability checks', 'Download latest APK', 'Quick sign-out option'] },
-      { number: 7, title: 'App Information Panel', description: 'Displays detailed application metadata including app name, version, build number, package name, and update status.', icon: FileText, iconColor: '#D4714A', image: app_info, details: ['App name and version', 'Build number details', 'Package information', 'Update status tracking', 'System metadata'] },
-      { number: 8, title: 'Registered SIM Details', description: 'Shows the registered office SIM details including slot information, carrier data, and call history, ensuring correct SIM usage.', icon: CheckCircle2, iconColor: '#A855A0', image: registered_sim, details: ['SIM slot information', 'Carrier data display', 'Call history tracking', 'Registration verification', 'Usage monitoring'] },
-      { number: 9, title: 'Dialer Screen', description: 'Allows users to manually enter phone numbers and place outgoing calls using the registered office SIM, with recent call indicators.', icon: PhoneCall, iconColor: '#2A9D8F', image: dialer, details: ['Manual number entry', 'Outgoing call placement', 'Office SIM routing', 'Recent call indicators', 'Quick dial options'] },
+      { 
+        number: 6, 
+        title: 'Settings Screen', 
+        description: 'Provides access to SIM configuration, app management options, update checks, and quick actions such as downloading the latest APK or signing out.', 
+        icon: Settings, 
+        iconColor: '#F59E0B', 
+        image: settings, 
+        details: ['SIM configuration access', 'App management options', 'Update availability checks', 'Download latest APK', 'Quick sign-out option'
+      ] },
+      { 
+        number: 7, 
+        title: 'App Information Panel', 
+        description: 'Displays detailed application metadata including app name, version, build number, package name, and update status.', 
+        icon: FileText, 
+        iconColor: '#EF4444', 
+        image: app_info, details: ['App name and version', 'Build number details', 'Package information', 'Update status tracking', 'System metadata'
+        ] },
+      { 
+        number: 8, 
+        title: 'Registered SIM Details', 
+        description: 'Shows the registered office SIM details including slot information, carrier data, and call history, ensuring correct SIM usage.', 
+        icon: CheckCircle2, 
+        iconColor: '#2A9D8F', 
+        image: registered_sim, 
+        details: ['SIM slot information', 'Carrier data display', 'Call history tracking', 'Registration verification', 'Usage monitoring'
+        ] },
+      { 
+        number: 9, 
+        title: 'Dialer Screen', 
+        description: 'Allows users to manually enter phone numbers and place outgoing calls using the registered office SIM, with recent call indicators.', 
+        icon: PhoneCall, 
+        iconColor: '#EC4899', 
+        image: dialer, 
+        details: ['Manual number entry', 'Outgoing call placement', 'Office SIM routing', 'Recent call indicators', 'Quick dial options'
+      ] },
     ],
   },
 ];
@@ -101,38 +183,112 @@ const FloatingNavButtons = ({ onScrollToTop, onScrollToBottom, showTop, showBott
 const ZoomModal = ({ show, onClose, step, isMobile }: {
   show: boolean; onClose: () => void; step: TutorialStep | null; isMobile: boolean;
 }) => {
-  if (!show || !step) return null;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose();  };
+    if (show) { document.addEventListener('keydown', onKey); 
+  document.body.style.setProperty('overflow','hidden');  
+  }
+  else document.body.style.setProperty('overflow', '');
+  return () => { document.removeEventListener('keydown', onKey);
+ document.body.style.setProperty('overflow', ''); }; 
+  }, [show]);
+
+  if(!step) return null;
+
   return ReactDOM.createPortal(
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          onClick={onClose}
-          style={{ position: 'fixed', inset: 0, zIndex: 99999, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}>
-          <motion.div
-            initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.92, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            onClick={(e) => e.stopPropagation()}
-            style={{ background: 'rgba(0,0,0,0.88)', borderRadius: 20, padding: '1.75rem 2rem', width: '90%', maxWidth: 700, minHeight: '65vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', cursor: 'default', boxShadow: `0 40px 100px rgba(0,0,0,0.7),0 0 0 2px ${step.iconColor}50`, gap: '1.25rem' }}>
-            <button onClick={onClose}
-              style={{ position: 'absolute', top: 16, right: 18, width: 38, height: 38, borderRadius: '50%', background: 'transparent', border: '2px solid white', color: 'white', fontSize: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'black'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'white'; }}>
-              ✕
-            </button>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 14px 6px 6px', borderRadius: 999, background: `${step.iconColor}15`, boxShadow: `0 0 0 1px ${step.iconColor}40` }}>
-              <div style={{ width: 30, height: 30, borderRadius: '50%', background: step.iconColor, color: '#fff', display: 'grid', placeItems: 'center', fontSize: 13, fontWeight: 700, boxShadow: `0 4px 12px ${step.iconColor}55` }}>{step.number}</div>
-              <span style={{ color: '#fff', fontSize: 14, fontWeight: 600, letterSpacing: 0.3 }}>{step.title}</span>
+    <>
+    <motion.div
+    animate = {{opacity: show ? 1:0 }}
+    transition={{duration: 0.15 }}
+    onClick={show ? onClose: undefined}
+    style={{
+      position: 'fixed', inset: 0, zIndex: 99999,
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
+      background: 'rgba(0, 0, 0, 0.55)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      cursor: show ? 'zoom-out': 'default',
+      pointerEvents: show ? 'auto' : 'none',
+    }}
+    >
+      <motion.div
+      animate={show ? { scale: 1, opacity: 1}: {scale: 0.94, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: 'rgba(0,0,0,0.88)',
+        borderRadius: 20,
+        padding: '1.75rem 2rem',
+        width: '90%', maxWidth: 700,
+        minHeight: '65vh',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        position: 'relative', cursor: 'default',
+        boxShadow: `0 40px 100px rgba(0,0,0,0.7),0 0 0 2px ${step.iconColor}50`,
+        gap: '1.25rem',
+        pointerEvents: show ? 'auto' : 'none',
+      }}
+      >
+      {/* Close button */}
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute', top: 16, right: 18,
+              width: 38, height: 38, borderRadius: '50%',
+              background: 'transparent', border: '2px solid white',
+              color: 'white', fontSize: '1rem', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'black'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'white'; }}
+          >
+            ✕
+          </button>
+    {/* Step badge */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '6px 14px 6px 6px', borderRadius: 999,
+            background: `${step.iconColor}15`,
+            boxShadow: `0 0 0 1px ${step.iconColor}40`,
+          }}>
+            <div style={{
+              width: 30, height: 30, borderRadius: '50%',
+              background: step.iconColor, color: '#fff',
+              display: 'grid', placeItems: 'center',
+              fontSize: 13, fontWeight: 700,
+              boxShadow: `0 4px 12px ${step.iconColor}55`,
+            }}>
+              {step.number}
             </div>
-            <img src={step.image} alt={step.title} style={{ maxWidth: '100%', maxHeight: '80vh', minHeight: 400, width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: 10, display: 'block', margin: '0 auto' }} />
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', margin: 0 }}>{isMobile ? 'Tap outside to close' : 'Click outside or press Esc to close'}</p>
-          </motion.div>
+            <span style={{ color: '#fff', fontSize: 14, fontWeight: 600, letterSpacing: 0.3 }}>
+              {step.title}
+            </span>
+          </div>
+          {/* Image — always rendered so browser decodes ahead of time */}
+          <img
+            src={step.image}
+            alt={step.title}
+            style={{
+              maxWidth: '100%', maxHeight: '80vh', minHeight: 400,
+              width: 'auto', height: 'auto',
+              objectFit: 'contain', borderRadius: 10,
+              display: 'block', margin: '0 auto',
+            }}
+          />
+
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', margin: 0 }}>
+            {isMobile ? 'Tap outside to close' : 'Click outside or press Esc to close'}
+          </p>
         </motion.div>
-      )}
-    </AnimatePresence>,
+      </motion.div>
+    </>,
     document.body
   );
 };
+        
+
+ 
 
 // ─── ScrollingStoryStep ───────────────────────────────────────────────────────
 const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }: {
@@ -203,12 +359,7 @@ const ScrollingStoryStep = ({ step, isMobile, isTablet, stepIndex, totalSteps }:
     };
   }, [showPopup, isMobile]);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setShowZoom(false); };
-    if (showZoom) { document.addEventListener('keydown', onKey); document.body.style.overflow = 'hidden'; }
-    else document.body.style.overflow = '';
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
-  }, [showZoom]);
+  
 
   const imageOnLeft = step.number % 2 === 1;
   const imageX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], imageOnLeft ? [-80, 0, 0, -80] : [80, 0, 0, 80]);
