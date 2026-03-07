@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   UserPlus, Settings, Shield, Mail, Lock, BarChart3, PhoneCall,
   ArrowRight, CheckCircle, FileText, CheckCircle2, ChevronLeft, ChevronRight, Grid3X3, List,
-  ArrowUp, ArrowDown, ArrowLeft, Eye, Sparkles, ZoomIn, Info
+  ArrowUp, ArrowDown, ArrowLeft, Eye, Sparkles, ZoomIn, Info, X
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 
