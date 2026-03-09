@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   UserPlus, Settings, Shield, Mail, Lock, BarChart3, PhoneCall,
   ArrowRight, CheckCircle, FileText, CheckCircle2, ChevronLeft, ChevronRight, Grid3X3, List,
-  ArrowUp, ArrowDown, ArrowLeft, Eye, Sparkles, ZoomIn, Info, X
+  ArrowUp, ArrowDown, ArrowLeft, Eye, Sparkles, ZoomIn, Info,X
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 
@@ -277,179 +277,179 @@ const IndexSidebar = ({ activeGlobalIdx, onJump, isOpen, onToggle, isMobile, foo
 
   const toggleSection = id => setOpenSections(prev => ({ ...prev, [id]: !prev[id] }))
 
-  if (isMobile) return null
-
-  return (
-    <motion.div
-      animate={{ x: isOpen ? 0 : -SIDEBAR_W }}
-      initial={false}
-      transition={{ type: 'spring', stiffness: 340, damping: 34 }}
-      style={{
-        position: 'fixed', left: 0, top: 0, bottom: footerOffset,
-        width: `${SIDEBAR_W}px`, zIndex: 500,
-        background: '#ffffff', borderRight: '1px solid #E8F4F8',
-        boxShadow: '6px 0 32px rgba(6,182,212,0.07), 2px 0 8px rgba(0,0,0,0.04)',
-        display: 'flex', flexDirection: 'column', overflow: 'hidden',
-      }}
-    >
-      {/* Header */}
-      <div style={{
-        background: `linear-gradient(135deg, ${BRAND.primary}08, ${BRAND.primaryLt}05)`,
-        padding: '1rem 1rem 0.85rem 1.1rem', borderBottom: '1px solid #EEF7FB',
-        flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <div style={{
-            width: '28px', height: '28px', borderRadius: '8px',
-            background: `linear-gradient(135deg, ${BRAND.primary}, ${BRAND.primaryDk})`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: `0 3px 10px ${BRAND.primary}40`, flexShrink: 0,
-          }}>
-            <List size={13} color="white" strokeWidth={2.5} />
-          </div>
-          <div>
-            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: BRAND.dark, fontFamily: '"Inter", sans-serif', lineHeight: 1 }}>Tutorial Index</div>
-            <div style={{ fontSize: '10px', color: BRAND.muted, marginTop: '2px', fontFamily: '"Inter", sans-serif' }}>{tutorialSections.length} sections · {ALL_STEPS.length} steps</div>
-          </div>
-        </div>
-        <motion.button
-          onClick={onToggle}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.93 }}
-          style={{ width: '28px', height: '28px', borderRadius: '7px', background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}
+   return (
+    <>
+      {isOpen && (
+        <motion.div
+          animate={{ x: isOpen ? 0 : -SIDEBAR_W }}
+          initial={false}
+          transition={{ type: 'spring', stiffness: 340, damping: 34 }}
+          style={{
+            position: 'fixed', left: 0, top: 0, bottom: footerOffset,
+            width: `${SIDEBAR_W}px`, zIndex: 500,
+            background: '#ffffff', borderRight: '1px solid #E8F4F8',
+            boxShadow: '6px 0 32px rgba(6,182,212,0.07), 2px 0 8px rgba(0,0,0,0.04)',
+            display: 'flex', flexDirection: 'column', overflow: 'hidden',
+          }}
         >
-          <ChevronLeft size={14} color={BRAND.muted} strokeWidth={2.5} />
-        </motion.button>
-      </div>
-
-      {/* Progress */}
-      <div style={{ padding: '0.7rem 1.1rem 0.65rem', borderBottom: '1px solid #F0F7FA', flexShrink: 0, background: '#FAFCFE' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-          <span style={{ fontSize: '10px', fontWeight: 600, color: BRAND.muted, fontFamily: '"Inter", sans-serif', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Progress</span>
-          <span style={{ fontSize: '10px', fontWeight: 700, color: BRAND.primary, fontFamily: '"Inter", sans-serif', background: `${BRAND.primary}12`, padding: '1px 7px', borderRadius: '999px', border: `1px solid ${BRAND.primary}25` }}>{activeGlobalIdx + 1} / {ALL_STEPS.length}</span>
-        </div>
-        <div style={{ height: '5px', background: '#EEF2F7', borderRadius: '5px', overflow: 'hidden' }}>
-          <motion.div
-            animate={{ width: `${((activeGlobalIdx + 1) / ALL_STEPS.length) * 100}%` }}
-            transition={{ type: 'spring', stiffness: 200, damping: 28 }}
-            style={{ height: '100%', background: `linear-gradient(to right, ${BRAND.primary}, ${BRAND.primaryLt})`, borderRadius: '5px', boxShadow: `0 0 6px ${BRAND.primary}50` }}
-          />
-        </div>
-      </div>
-
-      {/* Sections list */}
-      <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none', padding: '0.5rem 0 1rem' }}>
-        <style>{`.sb-sec-btn:hover{background:rgba(6,182,212,0.04)!important}.sb-step-btn:hover{background:rgba(6,182,212,0.05)!important}`}</style>
-        {tutorialSections.map((section, secIdx) => {
-          const secFirstIdx = ALL_STEPS.findIndex(s => s.number === section.steps[0].number)
-          const isSectionActive = activeGlobalIdx >= secFirstIdx && activeGlobalIdx < secFirstIdx + section.steps.length
-          const isExpanded = !!openSections[section.sectionId]
-          const completedInSection = section.steps.filter(st => ALL_STEPS.findIndex(x => x.number === st.number) < activeGlobalIdx).length
-          return (
-            <div key={section.sectionId} style={{ marginBottom: '2px' }}>
-              <button
-                className="sb-sec-btn"
-                onClick={() => toggleSection(section.sectionId)}
-                style={{
-                  width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem',
-                  padding: '0.5rem 0.9rem 0.5rem 0.8rem',
-                  background: isSectionActive ? `${section.sectionColor}07` : 'transparent',
-                  borderLeft: `3px solid ${isSectionActive ? section.sectionColor : 'transparent'}`,
-                  border: 'none', borderLeftStyle: 'solid', cursor: 'pointer', textAlign: 'left',
-                  transition: 'background 0.18s ease, border-color 0.18s ease',
-                }}
-              >
-                <div style={{
-                  width: '20px', height: '20px', borderRadius: '6px', flexShrink: 0,
-                  background: isSectionActive ? `linear-gradient(135deg, ${section.sectionColor}, ${section.sectionColor}bb)` : '#EEF2F7',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: isSectionActive ? `0 2px 6px ${section.sectionColor}40` : 'none',
-                  transition: 'all 0.22s ease',
-                }}>
-                  <span style={{ fontSize: '8px', fontWeight: 800, color: isSectionActive ? 'white' : BRAND.muted, fontFamily: '"Inter", sans-serif' }}>{String(secIdx + 1).padStart(2, '0')}</span>
-                </div>
-                <span style={{ flex: 1, fontSize: '10.5px', fontWeight: 700, color: isSectionActive ? section.sectionColor : '#64748B', fontFamily: '"Inter", sans-serif', lineHeight: 1.25, letterSpacing: '0.01em', transition: 'color 0.18s ease' }}>{section.sectionTitle}</span>
-                {completedInSection > 0 && (
-                  <span style={{ fontSize: '8.5px', fontWeight: 700, color: section.sectionColor, background: `${section.sectionColor}12`, padding: '1px 5px', borderRadius: '999px', border: `1px solid ${section.sectionColor}25`, flexShrink: 0, fontFamily: '"Inter", sans-serif' }}>{completedInSection}/{section.steps.length}</span>
-                )}
-                <motion.span animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.18 }} style={{ display: 'flex', flexShrink: 0 }}>
-                  <ChevronRight size={11} color={isSectionActive ? section.sectionColor : '#94A3B8'} strokeWidth={2.5} />
-                </motion.span>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {isExpanded && (
-                  <motion.div
-                    key="sec-steps"
-                    initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2, ease: 'easeInOut' }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div style={{ margin: '2px 0.6rem 4px 1.7rem', borderLeft: `1.5px solid ${section.sectionColor}25` }}>
-                      {section.steps.map((step, stepLocalIdx) => {
-                        const stepIdx = ALL_STEPS.findIndex(s => s.number === step.number)
-                        const isActive = stepIdx === activeGlobalIdx
-                        const isPast = stepIdx < activeGlobalIdx
-                        const isLast = stepLocalIdx === section.steps.length - 1
-                        return (
-                          <motion.button
-                            key={step.number}
-                            className="sb-step-btn"
-                            onClick={() => onJump(stepIdx)}
-                            whileTap={{ scale: 0.98 }}
-                            style={{
-                              width: '100%', display: 'flex', alignItems: 'center', gap: '0.55rem',
-                              padding: '0.38rem 0.6rem 0.38rem 0.85rem',
-                              background: isActive ? `linear-gradient(90deg, ${step.iconColor}10, transparent)` : 'transparent',
-                              border: 'none', cursor: 'pointer', textAlign: 'left',
-                              borderRadius: '0 8px 8px 0', position: 'relative',
-                              transition: 'background 0.15s ease', marginBottom: isLast ? 0 : '1px',
-                            }}
-                          >
-                            {isActive && (
-                              <div style={{ position: 'absolute', left: '-1px', top: '18%', bottom: '18%', width: '2.5px', borderRadius: '0 2px 2px 0', background: step.iconColor, boxShadow: `0 0 5px ${step.iconColor}70` }} />
-                            )}
-                            <div style={{
-                              width: '22px', height: '22px', borderRadius: '50%', flexShrink: 0, zIndex: 1,
-                              background: isActive ? step.iconColor : isPast ? `${step.iconColor}15` : '#F1F5F9',
-                              border: isActive ? `2px solid ${step.iconColor}` : isPast ? `1.5px solid ${step.iconColor}50` : '1.5px solid #DDE4EE',
-                              display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              boxShadow: isActive ? `0 2px 8px ${step.iconColor}45` : 'none', transition: 'all 0.2s ease',
-                            }}>
-                              {isPast ? (
-                                <CheckCircle size={11} color={step.iconColor} strokeWidth={2.5} />
-                              ) : (
-                                <span style={{ fontSize: '8px', fontWeight: 800, color: isActive ? 'white' : '#94A3B8', fontFamily: '"Inter", sans-serif' }}>{step.number}</span>
-                              )}
-                            </div>
-                            <span style={{
-                              flex: 1, fontSize: '11.5px',
-                              fontWeight: isActive ? 650 : isPast ? 500 : 450,
-                              color: isActive ? BRAND.dark : isPast ? '#4B5563' : '#94A3B8',
-                              lineHeight: 1.3, fontFamily: '"Inter", sans-serif',
-                              transition: 'color 0.15s ease', whiteSpace: 'nowrap',
-                              overflow: 'hidden', textOverflow: 'ellipsis',
-                            }}>{step.title}</span>
-                            {isActive && (
-                              <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: step.iconColor, flexShrink: 0, boxShadow: `0 0 4px ${step.iconColor}80` }} />
-                            )}
-                          </motion.button>
-                        )
-                      })}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+          <div style={{
+            background: `linear-gradient(135deg, ${BRAND.primary}08, ${BRAND.primaryLt}05)`,
+            padding: '1rem 1rem 0.85rem 1.1rem', borderBottom: '1px solid #EEF7FB',
+            flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div style={{
+                width: '28px', height: '28px', borderRadius: '8px',
+                background: `linear-gradient(135deg, ${BRAND.primary}, ${BRAND.primaryDk})`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: `0 3px 10px ${BRAND.primary}40`, flexShrink: 0,
+              }}>
+                <List size={13} color="white" strokeWidth={2.5} />
+              </div>
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: BRAND.dark, fontFamily: '"Inter", sans-serif', lineHeight: 1 }}>Tutorial Index</div>
+                <div style={{ fontSize: '10px', color: BRAND.muted, marginTop: '2px', fontFamily: '"Inter", sans-serif' }}>{tutorialSections.length} sections · {ALL_STEPS.length} steps</div>
+              </div>
             </div>
-          )
-        })}
-      </div>
-    </motion.div>
+            <motion.button
+              onClick={onToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.93 }}
+              style={{ width: '28px', height: '28px', borderRadius: '7px', background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}
+            >
+              <ChevronLeft size={14} color={BRAND.muted} strokeWidth={2.5} />
+            </motion.button>
+          </div>
+
+          <div style={{ padding: '0.7rem 1.1rem 0.65rem', borderBottom: '1px solid #F0F7FA', flexShrink: 0, background: '#FAFCFE' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+              <span style={{ fontSize: '10px', fontWeight: 600, color: BRAND.muted, fontFamily: '"Inter", sans-serif', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Progress</span>
+              <span style={{ fontSize: '10px', fontWeight: 700, color: BRAND.primary, fontFamily: '"Inter", sans-serif', background: `${BRAND.primary}12`, padding: '1px 7px', borderRadius: '999px', border: `1px solid ${BRAND.primary}25` }}>{activeGlobalIdx + 1} / {ALL_STEPS.length}</span>
+            </div>
+            <div style={{ height: '5px', background: '#EEF2F7', borderRadius: '5px', overflow: 'hidden' }}>
+              <motion.div
+                animate={{ width: `${((activeGlobalIdx + 1) / ALL_STEPS.length) * 100}%` }}
+                transition={{ type: 'spring', stiffness: 200, damping: 28 }}
+                style={{ height: '100%', background: `linear-gradient(to right, ${BRAND.primary}, ${BRAND.primaryLt})`, borderRadius: '5px', boxShadow: `0 0 6px ${BRAND.primary}50` }}
+              />
+            </div>
+          </div>
+
+          <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none', padding: '0.5rem 0 1rem' }}>
+            <style>{`.sb-sec-btn:hover{background:rgba(6,182,212,0.04)!important}.sb-step-btn:hover{background:rgba(6,182,212,0.05)!important}`}</style>
+            {tutorialSections.map((section, secIdx) => {
+              const secFirstIdx = ALL_STEPS.findIndex((s: any)=> s.number === section.steps[0].number)
+              const isSectionActive = activeGlobalIdx >= secFirstIdx && activeGlobalIdx < secFirstIdx + section.steps.length
+              const isExpanded = !!openSections[section.sectionId]
+              const completedInSection = section.steps.filter((st: any) => ALL_STEPS.findIndex(x => x.number === st.number) < activeGlobalIdx).length
+              const sectionColor = (section as any).sectionColor || BRAND.primary
+              return (
+                <div key={section.sectionId} style={{ marginBottom: '2px' }}>
+                  <button
+                    className="sb-sec-btn"
+                    onClick={() => toggleSection(section.sectionId)}
+                    style={{
+                      width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem',
+                      padding: '0.5rem 0.9rem 0.5rem 0.8rem',
+                      background: isSectionActive ? `${sectionColor}07` : 'transparent',
+                      borderLeft: `3px solid ${isSectionActive ? sectionColor : 'transparent'}`,
+                      border: 'none', borderLeftStyle: 'solid', cursor: 'pointer', textAlign: 'left',
+                      transition: 'background 0.18s ease, border-color 0.18s ease',
+                    }}
+                  >
+                    <div style={{
+                      width: '20px', height: '20px', borderRadius: '6px', flexShrink: 0,
+                      background: isSectionActive ? `linear-gradient(135deg, ${sectionColor}, ${sectionColor}bb)` : '#EEF2F7',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: isSectionActive ? `0 2px 6px ${sectionColor}40` : 'none',
+                      transition: 'all 0.22s ease',
+                    }}>
+                      <span style={{ fontSize: '8px', fontWeight: 800, color: isSectionActive ? 'white' : BRAND.muted, fontFamily: '"Inter", sans-serif' }}>{String(secIdx + 1).padStart(2, '0')}</span>
+                    </div>
+                    <span style={{ flex: 1, fontSize: '10.5px', fontWeight: 700, color: isSectionActive ? sectionColor : '#64748B', fontFamily: '"Inter", sans-serif', lineHeight: 1.25, letterSpacing: '0.01em', transition: 'color 0.18s ease' }}>{section.sectionTitle}</span>
+                    {completedInSection > 0 && (
+                      <span style={{ fontSize: '8.5px', fontWeight: 700, color: sectionColor, background: `${sectionColor}12`, padding: '1px 5px', borderRadius: '999px', border: `1px solid ${sectionColor}25`, flexShrink: 0, fontFamily: '"Inter", sans-serif' }}>{completedInSection}/{section.steps.length}</span>
+                    )}
+                    <motion.span animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.18 }} style={{ display: 'flex', flexShrink: 0 }}>
+                      <ChevronRight size={11} color={isSectionActive ? sectionColor : '#94A3B8'} strokeWidth={2.5} />
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        key="sec-steps"
+                        initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: 'easeInOut' }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <div style={{ margin: '2px 0.6rem 4px 1.7rem', borderLeft: `1.5px solid ${sectionColor}25` }}>
+                          {section.steps.map((step, stepLocalIdx) => {
+                            const stepIdx = ALL_STEPS.findIndex((s: any)=> s.number === step.number)
+                            const isActive = stepIdx === activeGlobalIdx
+                            const isPast = stepIdx < activeGlobalIdx
+                            const isLast = stepLocalIdx === section.steps.length - 1
+                            return (
+                              <motion.button
+                                key={step.number}
+                                className="sb-step-btn"
+                                onClick={() => onJump(stepIdx)}
+                                whileTap={{ scale: 0.98 }}
+                                style={{
+                                  width: '100%', display: 'flex', alignItems: 'center', gap: '0.55rem',
+                                  padding: '0.38rem 0.6rem 0.38rem 0.85rem',
+                                  background: isActive ? `linear-gradient(90deg, ${step.iconColor}10, transparent)` : 'transparent',
+                                  border: 'none', cursor: 'pointer', textAlign: 'left',
+                                  borderRadius: '0 8px 8px 0', position: 'relative',
+                                  transition: 'background 0.15s ease', marginBottom: isLast ? 0 : '1px',
+                                }}
+                              >
+                                {isActive && (
+                                  <div style={{ position: 'absolute', left: '-1px', top: '18%', bottom: '18%', width: '2.5px', borderRadius: '0 2px 2px 0', background: step.iconColor, boxShadow: `0 0 5px ${step.iconColor}70` }} />
+                                )}
+                                <div style={{
+                                  width: '22px', height: '22px', borderRadius: '50%', flexShrink: 0, zIndex: 1,
+                                  background: isActive ? step.iconColor : isPast ? `${step.iconColor}15` : '#F1F5F9',
+                                  border: isActive ? `2px solid ${step.iconColor}` : isPast ? `1.5px solid ${step.iconColor}50` : '1.5px solid #DDE4EE',
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                  boxShadow: isActive ? `0 2px 8px ${step.iconColor}45` : 'none', transition: 'all 0.2s ease',
+                                }}>
+                                  {isPast ? (
+                                    <CheckCircle size={11} color={step.iconColor} strokeWidth={2.5} />
+                                  ) : (
+                                    <span style={{ fontSize: '8px', fontWeight: 800, color: isActive ? 'white' : '#94A3B8', fontFamily: '"Inter", sans-serif' }}>{step.number}</span>
+                                  )}
+                                </div>
+                                <span style={{
+                                  flex: 1, fontSize: '11.5px',
+                                  fontWeight: isActive ? 650 : isPast ? 500 : 450,
+                                  color: isActive ? BRAND.dark : isPast ? '#4B5563' : '#94A3B8',
+                                  lineHeight: 1.3, fontFamily: '"Inter", sans-serif',
+                                  transition: 'color 0.15s ease', whiteSpace: 'nowrap',
+                                  overflow: 'hidden', textOverflow: 'ellipsis',
+                                }}>{step.title}</span>
+                                {isActive && (
+                                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: step.iconColor, flexShrink: 0, boxShadow: `0 0 4px ${step.iconColor}80` }} />
+                                )}
+                              </motion.button>
+                            )
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )
+            })}
+          </div>
+        </motion.div>
+      )}
+    </>
   )
 }
 
 // ─── STEP CARD ────────────────────────────────────────────────────────────────
-const StepCard = ({ step, isMobile, isTablet, globalIdx, canPrev, canNext, onPrev, onNext, setGlobalIdx }) => {
+const StepCard = ({ step, isMobile, isTablet, globalIdx, canPrev, canNext, onPrev, onNext, setGlobalIdx, setIsUserNavigation }) => {
   const [showZoom, setShowZoom] = useState(false)
   const [imgLoaded, setImgLoaded] = useState(false)
   const Icon = step.icon
@@ -475,7 +475,30 @@ const StepCard = ({ step, isMobile, isTablet, globalIdx, canPrev, canNext, onPre
       >
         {/* Top accent bar */}
         <div style={{ height: '5px', background: `linear-gradient(90deg, ${step.iconColor}, ${step.iconColor}60, transparent)`, flexShrink: 0 }} />
-
+        {/* Mobile prev/next */}
+      {isMobile && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '10px 14px', borderBottom: `1px solid ${step.iconColor}18`, background: 'rgba(248,250, 252,0.8)', flexShrink: 0}}>
+          <motion.button onClick={onPrev} disabled={!canPrev} whileHover={canPrev ? { scale: 1.04}: {}} whileTap={canPrev ? {scale: 0.97}: {}} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: '0.5rem 0.8rem', background: canPrev ? `linear-gradient(135deg, ${BRAND.mid}, #334155)` : 'rgba(0,0,0,0.04)', color: canPrev ? 'white' : BRAND.muted, border: 'none', borderRadius: '9px',fontSize: '12px', fontWeight: 600, cursor: canPrev ? 'pointer' : 'not-allowed', fontFamily: '"Inter",sans-serif', boxShadow: canPrev ? '0 4px 14px rgba(15,23,42,0.22)' : 'none', flexShrink: 0 }}>
+            <ChevronLeft size={15} strokeWidth={2.5} />
+            </motion.button> 
+            <div style = {{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',overflow: 'hidden' }}>
+              {ALL_STEPS.map((_: TutorialStep, i: number) => {
+                const distance = Math.abs(i - globalIdx)
+                if (distance > 4) return null
+                const isActive = i === globalIdx
+                const isNear = distance === 1
+                return (
+                  <motion.button key={i} onClick={() => { setIsUserNavigation(true); setGlobalIdx(i) }} animate={{ width: isActive ? 30 : isNear ? 14 : 7, height: 6, opacity: isActive ? 1 : isNear ? 0.6 : 0.28, backgroundColor: isActive ? step.iconColor : isNear ? `${step.iconColor}90` : '#cbd5e1' }} transition={{ duration: 0.25, ease: 'easeInOut' }} style={{ borderRadius: 999, border: 'none', cursor: 'pointer', padding: 0 }} />
+              )
+              })}
+             </div>
+                <motion.button onClick={onNext} disabled={!canNext} whileHover={canNext ? {scale: 0.97 }: {}} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: '0.5rem 0.8rem', background: canNext ? `linear-gradient(135deg, ${step.iconColor}, ${step.iconColor}cc)`: 'rgba(0,0,0,0.04)', color: canNext ? 'white' : BRAND.muted, border: 'none', borderRadius: '9px', fontSize: '12px', fontWeight: 600, cursor: canNext ? 'pointer': 'not-allowed', fontFamily: '"Inter",sans-serif', boxShadow: canNext ? `0 4px 18px ${step.iconColor}45`:'none', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+                  {canNext && (<motion.div animate={{ x: ['-100%', '120%'] }} transition={{ duration: 2.2, repeat: Infinity, ease: 'linear'}} style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent)', pointerEvents: 'none' }}  />)}
+                  <ChevronRight size={15} strokeWidth={2.5} style={{ position: 'relative', zIndex: 1}} />
+                  </motion.button>  
+            </div>
+      )}
+      
         {/* Main body */}
         <div style={{
           display: 'grid',
@@ -677,85 +700,30 @@ const StepCard = ({ step, isMobile, isTablet, globalIdx, canPrev, canNext, onPre
             </div>
 
             {/* Prev / Next */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', paddingTop: '1rem', borderTop: `1px solid ${step.iconColor}14`, marginTop: 'auto' }}>
-              <motion.button
-                onClick={onPrev}
-                disabled={!canPrev}
-                whileHover={canPrev ? { scale: 1.04 } : {}}
-                whileTap={canPrev ? { scale: 0.97 } : {}}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.35rem',
-                  padding: isMobile ? '0.6rem 0.9rem' : '0.65rem 1.2rem',
-                  background: canPrev ? `linear-gradient(135deg, ${BRAND.mid}, #334155)` : 'rgba(0,0,0,0.04)',
-                  color: canPrev ? 'white' : BRAND.muted,
-                  border: 'none', borderRadius: '10px',
-                  fontSize: '12.5px', fontWeight: 600,
-                  cursor: canPrev ? 'pointer' : 'not-allowed',
-                  fontFamily: '"Inter", sans-serif',
-                  boxShadow: canPrev ? '0 4px 14px rgba(15,23,42,0.22)' : 'none',
-                  transition: 'all 0.2s ease', flexShrink: 0,
-                }}
-              >
-                <ChevronLeft size={15} strokeWidth={2.5} />
-                {!isMobile && 'Previous'}
-              </motion.button>
-
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', overflow: 'hidden' }}>
-                {ALL_STEPS.map((s, i) => {
+              {!isMobile && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingTop: '1.25rem', borderTop: `1px solid ${step.iconColor}18`, flexShrink: 0 }}>
+                <motion.button onClick={onPrev} disabled={!canPrev} whileHover={canPrev ? { scale: 1.04 } : {}} whileTap={canPrev ? { scale: 0.97 } : {}} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: isMobile ? '0.5rem 0.8rem' : '0.55rem 1rem', background: canPrev ? `linear-gradient(135deg, ${BRAND.mid}, #334155)` : 'rgba(0,0,0,0.04)', color: canPrev ? 'white' : BRAND.muted, border: 'none', borderRadius: '9px', fontSize: '12px', fontWeight: 600, cursor: canPrev ? 'pointer' : 'not-allowed', fontFamily: '"Inter", sans-serif', boxShadow: canPrev ? '0 4px 14px rgba(15,23,42,0.22)' : 'none', transition: 'all 0.2s ease', flexShrink: 0 }}>
+                  <ChevronLeft size={15} strokeWidth={2.5} />
+                  {!isMobile && 'Previous'}
+                </motion.button>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', overflow: 'hidden' }}>
+                {ALL_STEPS.map((_: TutorialStep, i: number) => {
                   const distance = Math.abs(i - globalIdx)
                   if (distance > 4) return null
                   const isActive = i === globalIdx
                   const isNear = distance === 1
                   return (
-                    <motion.button
-                      key={i}
-                      onClick={() => {
-                        setIsUserNavigation(true)
-                        setGlobalIdx(i)
-                      }}
-                      animate={{
-                        width: isActive ? 30 : isNear ? 14 : 7,
-                        height: 6,
-                        opacity: isActive ? 1 : isNear ? 0.6 : 0.28,
-                        backgroundColor: isActive ? step.iconColor : isNear ? `${step.iconColor}90` : '#cbd5e1',
-                      }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      style={{ borderRadius: 999, border: 'none', cursor: 'pointer', padding: 0 }}
-                    />
+                    <motion.button key={i} onClick={() => { setIsUserNavigation(true); setGlobalIdx(i) }} animate={{ width: isActive ? 30 : isNear ? 14 : 7, height: 6, opacity: isActive ? 1 : isNear ? 0.6 : 0.28, backgroundColor: isActive ? step.iconColor : isNear ? `${step.iconColor}90` : '#cbd5e1' }} transition={{ duration: 0.25, ease: 'easeInOut' }} style={{ borderRadius: 999, border: 'none', cursor: 'pointer', padding: 0 }} />
                   )
                 })}
               </div>
-
-              <motion.button
-                onClick={onNext}
-                disabled={!canNext}
-                whileHover={canNext ? { scale: 1.04 } : {}}
-                whileTap={canNext ? { scale: 0.97 } : {}}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.35rem',
-                  padding: isMobile ? '0.6rem 0.9rem' : '0.65rem 1.2rem',
-                  background: canNext ? `linear-gradient(135deg, ${step.iconColor}, ${step.iconColor}cc)` : 'rgba(0,0,0,0.04)',
-                  color: canNext ? 'white' : BRAND.muted,
-                  border: 'none', borderRadius: '10px',
-                  fontSize: '12.5px', fontWeight: 600,
-                  cursor: canNext ? 'pointer' : 'not-allowed',
-                  fontFamily: '"Inter", sans-serif',
-                  boxShadow: canNext ? `0 4px 18px ${step.iconColor}45` : 'none',
-                  transition: 'all 0.2s ease', flexShrink: 0,
-                  position: 'relative', overflow: 'hidden',
-                }}
-              >
-                {canNext && (
-                  <motion.div
-                    animate={{ x: ['-100%', '120%'] }}
-                    transition={{ duration: 2.2, repeat: Infinity, ease: 'linear' }}
-                    style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)', pointerEvents: 'none' }}
-                  />
-                )}
+              <motion.button onClick={onNext} disabled={!canNext} whileHover={canNext ? { scale: 1.04 } : {}} whileTap={canNext ? { scale: 0.97 } : {}} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: isMobile ? '0.5rem 0.8rem' : '0.55rem 1rem', background: canNext ? `linear-gradient(135deg, ${step.iconColor}, ${step.iconColor}cc)` : 'rgba(0,0,0,0.04)', color: canNext ? 'white' : BRAND.muted, border: 'none', borderRadius: '9px', fontSize: '12px', fontWeight: 600, cursor: canNext ? 'pointer' : 'not-allowed', fontFamily: '"Inter", sans-serif', boxShadow: canNext ? `0 4px 18px ${step.iconColor}45` : 'none', transition: 'all 0.2s ease', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+                {canNext && (<motion.div animate={{ x: ['-100%', '120%'] }} transition={{ duration: 2.2, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)', pointerEvents: 'none' }} />)}
                 {!isMobile && <span style={{ position: 'relative', zIndex: 1 }}>Next</span>}
                 <ChevronRight size={15} strokeWidth={2.5} style={{ position: 'relative', zIndex: 1 }} />
               </motion.button>
             </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -782,7 +750,7 @@ export default function TutorialPage() {
   const [isTablet,    setIsTablet]    = useState(false)
   const [globalIdx,   setGlobalIdx]   = useState(0)
   const [viewMode,    setViewMode]    = useState('step')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
   const contentRef = useRef(null)
   const footerRef  = useRef(null)
   const isFirstRender = useRef(true)
@@ -928,7 +896,7 @@ export default function TutorialPage() {
                   transition={{ duration: 0.7, delay: 0.2 }}
                   style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', fontWeight: 400, color: BRAND.slate, marginTop: '-0.75rem', marginBottom: '1.5rem', lineHeight: isMobile ? '22px' : '26px' }}
                 >
-                  Learn how to streamline meetings, boost collaboration, and scale faster with comprehensive tutorials covering setup, configuration, and advanced features.
+                Learn how to streamline call management,and scale faster with comprehensive tutorials covering setup, configuration, and advanced features.
                 </motion.p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -981,11 +949,21 @@ export default function TutorialPage() {
         {/* ── STICKY NAV ── */}
         <div data-sticky-nav style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(248,250,252,0.92)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: isMobile ? '0.75rem 1rem' : '0.85rem 2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            {!isMobile && (
+            {isMobile && (
               <motion.button onClick={() => setSidebarOpen(o => !o)} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '5px 12px 5px 7px', background: sidebarOpen ? `linear-gradient(135deg, ${BRAND.primary}18, rgba(56,189,248,0.12))` : 'linear-gradient(135deg, rgba(15,23,42,0.06), rgba(15,23,42,0.03))', border: `1.5px solid ${sidebarOpen ? BRAND.primary + '45' : 'rgba(0,0,0,0.1)'}`, borderRadius: '999px', backdropFilter: 'blur(10px)', cursor: 'pointer', flexShrink: 0, transition: 'all 0.22s ease' }}>
-                <div style={{ width: '26px', height: '26px', borderRadius: '7px', flexShrink: 0, background: sidebarOpen ? `linear-gradient(135deg, ${BRAND.primary}30, ${BRAND.primary}18)` : 'linear-gradient(135deg, rgba(15,23,42,0.1), rgba(15,23,42,0.06))', border: `1.5px solid ${sidebarOpen ? BRAND.primary + '40' : 'rgba(0,0,0,0.12)'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '3px' }}>
-                  {[13, 9, 13].map((w, i) => (<div key={i} style={{ width: `${w}px`, height: '1.5px', borderRadius: '2px', background: sidebarOpen ? BRAND.primaryDk : BRAND.slate, transition: 'all 0.2s ease' }} />))}
-                </div>
+                <div style={{ width: '26px', height: '26px', borderRadius: '7px', flexShrink: 0, background: sidebarOpen ? `linear-gradient(135deg, ${BRAND.primary}30, ${BRAND.primary}18)` : 'linear-gradient(135deg, rgba(15,23,42,0.1), rgba(15,23,42,0.06))', border: `1.5px solid ${sidebarOpen ? BRAND.primary + '40' : 'rgba(0,0,0,0.12)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1px' }}>
+  {sidebarOpen ? (
+    <>
+      <ChevronLeft size={11} color={BRAND.primaryDk} strokeWidth={2.5} />
+      <div style={{ width: '1.5px', height: '10px', borderRadius: '2px', background: BRAND.primaryDk }} />
+    </>
+  ) : (
+    <>
+      <div style={{ width: '1.5px', height: '10px', borderRadius: '2px', background: BRAND.slate }} />
+      <ChevronRight size={11} color={BRAND.slate} strokeWidth={2.5} />
+    </>
+  )}
+</div>
                 <span style={{ fontSize: '12px', fontWeight: 600, color: sidebarOpen ? BRAND.primaryDk : BRAND.slate, fontFamily: '"Inter", sans-serif', letterSpacing: '-0.01em', transition: 'color 0.2s ease' }}>{sidebarOpen ? 'Hide index' : 'Tutorial Index'}</span>
               </motion.button>
             )}
@@ -1029,7 +1007,7 @@ export default function TutorialPage() {
             </div>
             <div style={{ width: '100%', maxWidth: '1160px' }}>
               <AnimatePresence mode="wait">
-                <StepCard key={globalIdx} step={currentStep} isMobile={isMobile} isTablet={isTablet} globalIdx={globalIdx} canPrev={canPrev} canNext={canNext} onPrev={prev} onNext={next} setGlobalIdx={handleStepClick} />
+                <StepCard key={globalIdx} step={currentStep} isMobile={isMobile} isTablet={isTablet} globalIdx={globalIdx} canPrev={canPrev} canNext={canNext} onPrev={prev} onNext={next} setGlobalIdx={handleStepClick} setIsUserNavigation={setIsUserNavigation} />
               </AnimatePresence>
             </div>
           </section>
@@ -1085,7 +1063,7 @@ export default function TutorialPage() {
                               </div>
                               <span style={{ fontSize: isMobile ? '14px' : '15px', fontWeight: 700, color: isPast ? BRAND.slate : BRAND.dark, fontFamily: '"Poppins", sans-serif', lineHeight: 1.3, paddingTop: '3px' }}>{step.title}</span>
                             </div>
-                            <p style={{ fontSize: isMobile ? '12px' : '13px', color: BRAND.slate, lineHeight: 1.65, fontFamily: '"Inter", sans-serif', margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }}>{step.description}</p>
+                            <p style={{ fontSize: isMobile ? '12px' : '13px', color: BRAND.slate, lineHeight: 1.65, fontFamily: '"Inter", sans-serif', margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' as any, overflow: 'hidden' }}>{step.description}</p>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '0.65rem', borderTop: '1px solid rgba(0,0,0,0.06)', marginTop: 'auto' }}>
                               <span style={{ fontSize: '11.5px', color: BRAND.muted, fontFamily: '"Inter", sans-serif', fontWeight: 500 }}>{step.details.length} key {step.details.length === 1 ? 'point' : 'points'}</span>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: step.iconColor }}>
