@@ -750,7 +750,7 @@ export default function TutorialPage() {
   const [isTablet,    setIsTablet]    = useState(false)
   const [globalIdx,   setGlobalIdx]   = useState(0)
   const [viewMode,    setViewMode]    = useState('step')
-  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const contentRef = useRef(null)
   const footerRef  = useRef(null)
   const isFirstRender = useRef(true)
@@ -822,6 +822,10 @@ export default function TutorialPage() {
     fn(); window.addEventListener('resize', fn)
     return () => window.removeEventListener('resize', fn)
   }, [])
+
+  useEffect(() => {
+    setSidebarOpen(!isMobile && !isTablet)
+  },[isMobile, isTablet])
 
   useEffect(() => {
     if (isFirstRender.current) {
